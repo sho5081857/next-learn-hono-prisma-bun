@@ -27,12 +27,3 @@ export class CustomerUseCaseImpl implements CustomerUseCase {
   }
 }
 
-// Usage example
-// import { PrismaClient } from "@prisma/client";
-// import { CustomerRepositoryImpl } from "../adapter/gateway/customer";
-
-// const prisma = new PrismaClient();
-// const customerRepository = new CustomerRepositoryImpl(prisma);
-// const customerUseCase = new CustomerUseCaseImpl(customerRepository);
-
-// export { customerUseCase };
