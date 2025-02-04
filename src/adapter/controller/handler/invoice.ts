@@ -44,7 +44,7 @@ export class InvoiceHandler {
   async getFilteredInvoicesList(c: Context) {
     const query = c.req.query('query') ?? ''
     const offset = c.req.query('offset') ?? '6'
-    const limit = c.req.query('limit')  ?? '0'
+    const limit = c.req.query('limit') ?? '0'
     try {
       const { invoices, totalCount } = await this.invoiceUseCase.getFiltered(
         query,
@@ -122,10 +122,8 @@ export class InvoiceHandler {
       }
 
       return c.json({
-        apiVersion: '1.0',
-        kind: 'invoice',
+        apiVersion: apiVersion,
         data: {
-          kind: 'invoice',
           id: updatedInvoice.id,
           customerId: updatedInvoice.customer_id,
           status: updatedInvoice.status,
