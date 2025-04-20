@@ -1,0 +1,21 @@
+volumes:
+  db-store:
+
+services:
+  db:
+    image: postgres:17.2-alpine
+    ports:
+      - target: 5432
+        published: ${DB_PUBLISHED_PORT:-5432}
+        protocol: tcp
+        mode: host
+    volumes:
+      - type: volume
+        source: db-store
+        target: /var/lib/postgresql/data
+        volume:
+          nocopy: true
+    environment:
+      POSTGRES_DB: ${DB_DATABASE:-postgres}
+      POSTGRES_USER: ${DB_USERNAME:-postgres}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-postgres}
