@@ -1,0 +1,52 @@
+version: "3"
+
+
+tasks:
+  build:
+    cmds:
+      - docker compose build
+
+  up:
+    cmds:
+      - docker compose up -d
+
+  down:
+    cmds:
+      - docker compose down --remove-orphans
+
+  down-v:
+    cmds:
+      - docker compose down --remove-orphans --volumes
+
+  stop:
+    cmds:
+      - docker compose stop
+
+  restart:
+    cmds:
+      - docker compose down --remove-orphans
+      - docker compose up -d
+
+  destroy:
+    cmds:
+      - docker compose down --rmi all --volumes --remove-orphans
+
+  ps:
+    cmds:
+      - docker compose ps
+
+  db:
+    cmds:
+      - docker compose exec db bash
+
+  sql:
+    cmds:
+      - docker compose exec db bash -c 'PGPASSWORD=$POSTGRES_PASSWORD psql -U $POSTGRES_USER -d $POSTGRES_DB'
+
+  sql-create:
+      cmds:
+        - docker compose exec -T db bash -c 'PGPASSWORD=$POSTGRES_PASSWORD psql -U $POSTGRES_USER -d $POSTGRES_DB' < _tools/first.sql
+
+  prisma-studio:
+    cmds:
+      - bunx prisma studio
